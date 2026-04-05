@@ -1,0 +1,27 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2312                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      particleProperties;
+}
+
+
+rhop 2500;          // Particle density [kg/m3] (e.g., water droplets)
+e   0.95;        // Particle elasticity [0-1] (e.g., 0.95 for nearly elastic collisions)
+mu 0.001;        // Particle dynamic viscosity [Pa.s] (e.g., water at room temp)
+
+diameter ( 1e-3 );   // Particle diameter [m] (e.g., 1 mm)
+velocity (
+    (2.0 0 0) // Initial particle velocity [m/s]
+);
+position (
+     (0.1 0.8 0.02) // Initial particle position [m]
+);

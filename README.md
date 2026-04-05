@@ -21,6 +21,14 @@ A collection of innovative C++ projects that combine computational fluid dynamic
 
 ![TextDiffusion Animation](./src/TextDiffusion/case/anim.gif)
 
+## [BouncingBall](./src/BouncingBall/)
+
+**CFD Simulation of a Bouncing Ball** - Simulates the fluid dynamics around a bouncing ball using OpenFOAM.
+- **Sets up a computational mesh** around the ball
+- **Applies boundary conditions** to simulate bouncing motion
+- **Visualizes the flow field** around the ball during its motion
+
+![BouncingBall Simulation](./src/BouncingBall/case/anim.gif)
 
 ## 📄 License
 

@@ -1,0 +1,4 @@
+../patchInteractSolidParticle.t.cpp
+../patchInteractSolidParticle.cpp
+
+EXE = $(FOAM_USER_APPBIN)/patchInteractSolidParticleTest

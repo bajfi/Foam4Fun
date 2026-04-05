@@ -6,6 +6,7 @@
 *.lo
 *.o
 *.obj
+*.dep
 
 # Precompiled Headers
 *.gch
@@ -74,6 +75,7 @@ Testing/
 **/Make/linux*/
 
 # OpenFOAM simulation result time folders (keep initial condition folder "0/")
+**/[1-9]*/
 **/[0-9]*\.*/
 **/*e-[0-9]*/
 **/*E-[0-9]*/
@@ -92,3 +94,6 @@ log.*
 
 # OpenFOAM backup and temporary files
 *.bak.swp
+
+*.pvsm
+*.avi

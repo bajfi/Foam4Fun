@@ -1,0 +1,7 @@
+
+
+main.cpp
+patchInteractSolidParticle.cpp
+patchInteractSolidParticleCloud.cpp
+
+EXE = $(FOAM_USER_APPBIN)/bouncingBall
