@@ -1,0 +1,136 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2306                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    object      kinematicCloudProperties;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+solution
+{
+    active          true;
+    coupled         no;
+    transient       yes;
+    cellValueSourceCorrection off;
+    maxCo 			0.3;
+
+    sourceTerms
+    {
+        schemes
+        {
+            U               semiImplicit 1;
+        }
+    }
+
+    interpolationSchemes
+    {
+        rho             cell;
+        U               cellPoint;
+        mu             	cell;
+        p               cell;
+        grad(p_rgh)		cellPoint;
+        grad(p)			cellPoint;
+        muc				cell;
+        gradAlpha		cell;	// needed for virtual mass
+        DUcDt			cellPoint;	// needed for virtual mass
+        curlUcDt		cellPoint;	// meeded for SaffmanMeiList
+    }
+
+    integrationSchemes
+    {
+        U               Euler;
+    }
+}
+
+constantProperties
+{
+    rho0            1250;	// density
+    alphaMax		0.9;
+    youngsModulus 	1e6;	// Young's modulus
+	poissonsRatio 	0.2;	// Poisson's ratio
+}
+
+subModels
+{
+    particleForces
+    {
+        gravity;
+    }
+
+    injectionModels
+    {
+    	model1
+        {
+            type            continuousManualInjection;
+            patch           movingWall;
+            SOI             0;
+            duration        1500;
+            U0				(0 0 0);
+            Umag            sine;
+            UmagCoeffs
+            {
+                frequency   1;
+                amplitude   0.15;
+                level       0.2;
+                scale       1.0;
+            }
+            parcelBasisType fixed;
+            nParticle		1;
+            parcelsPerSecond 8000;
+            flowRateProfile  1;
+            positionsFile   "positionsFile";
+            massTotal        1;
+            sizeDistribution
+            {
+                type        fixedValue;
+                fixedValueDistribution
+                {
+                    value   7e-4;
+                }
+            }
+
+        }
+    }
+
+    dispersionModel none;
+
+    patchInteractionModel localInteraction;
+
+    localInteractionCoeffs
+    {
+    	patches
+    	(
+    		"(movingWall|fixedWalls|front|back)"
+            {
+                type escape;
+                e    1;
+                mu   0;
+            }
+        );
+    }
+
+    stochasticCollisionModel none;
+
+    surfaceFilmModel none;
+
+    radiation	off;
+
+    collisionModel none;
+}
+
+
+cloudFunctions
+{
+
+}
+
+
+// ************************************************************************* //
