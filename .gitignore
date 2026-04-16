@@ -97,3 +97,5 @@ log.*
 
 *.pvsm
 *.avi
+
+lnInclude/
